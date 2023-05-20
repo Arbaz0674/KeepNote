@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import noteContext from "../context/notes/NoteContext";
 
 export default function NoteItem(props) {
+  const context = useContext(noteContext);
+  const { deleteNote } = context;
   const { note } = props;
+  const delNote = () => {
+    deleteNote(note._id);
+  };
   return (
     <div className="col-md-3 mx-2">
       <div className="card my-3" style={{ width: "18rem" }}>
@@ -15,6 +21,7 @@ export default function NoteItem(props) {
           <i
             className="fa-solid fa-trash mx-2"
             style={{ color: "#1f5151" }}
+            onClick={delNote}
           ></i>
         </div>
       </div>
