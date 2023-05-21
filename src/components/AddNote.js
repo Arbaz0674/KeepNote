@@ -40,11 +40,15 @@ export default function AddNote() {
               onChange={onChange}
             />
           </div>
-          <div className="form-group form-check my-2">
+          <div className="form-group my-2">
+            <label htmlFor="tags">Tags</label>
             <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
+              type="text"
+              className="form-control"
+              id="tags"
+              name="tags"
+              placeholder="Note Tags"
+              onChange={onChange}
             />
           </div>
           <button
