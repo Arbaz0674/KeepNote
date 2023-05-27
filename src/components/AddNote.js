@@ -16,14 +16,16 @@ export default function AddNote() {
   };
   return (
     <div>
-      <div className="container my-3">
+      <div className="container my-3 text-center">
         <h1 className="title">Add a Note</h1>
         <form className="my-3">
           <div className="form-group my-2">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title" className="item-label my-2">
+              Title
+            </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control my-2"
               id="title"
               name="title"
               aria-describedby="emailHelp"
@@ -35,10 +37,12 @@ export default function AddNote() {
             />
           </div>
           <div className="form-group my-2">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description" className="item-label my-2">
+              Description
+            </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control my-2"
               id="description"
               name="description"
               placeholder="Pen Down Description"
@@ -49,10 +53,12 @@ export default function AddNote() {
             />
           </div>
           <div className="form-group my-2">
-            <label htmlFor="tags">Tags</label>
+            <label htmlFor="tags" className="item-label">
+              Tags
+            </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control my-2"
               id="tags"
               name="tags"
               placeholder="Note Tags"
@@ -65,7 +71,7 @@ export default function AddNote() {
           <button
             disabled={note.title.length < 5 || note.description.length < 5}
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary my-2"
             onClick={createNote}
           >
             Add Note

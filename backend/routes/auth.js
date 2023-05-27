@@ -17,6 +17,7 @@ router.post(
     body("password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -39,10 +40,11 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, SECRET_KEY);
-      res.status(200).json({ authToken });
+      success = true;
+      res.status(200).json({ success, authToken });
     } catch (err) {
       console.log(err);
-      res.status(400).json({ err: err });
+      res.status(400).json({ success, err: err });
     }
   }
 );
