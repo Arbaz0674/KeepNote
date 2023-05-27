@@ -1,3 +1,4 @@
+import "./../css/Style.css";
 import React, { useContext, useState } from "react";
 import noteContext from "../context/notes/NoteContext";
 
@@ -8,6 +9,7 @@ export default function AddNote() {
   const createNote = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
+    setNote({ title: "", description: "", tag: "" });
   };
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -15,7 +17,7 @@ export default function AddNote() {
   return (
     <div>
       <div className="container my-3">
-        <h1>Add a Note</h1>
+        <h1 className="title">Add a Note</h1>
         <form className="my-3">
           <div className="form-group my-2">
             <label htmlFor="title">Title</label>
@@ -26,7 +28,10 @@ export default function AddNote() {
               name="title"
               aria-describedby="emailHelp"
               placeholder="Pen Down Title"
+              value={note.title}
               onChange={onChange}
+              minLength={5}
+              required
             />
           </div>
           <div className="form-group my-2">
@@ -37,7 +42,10 @@ export default function AddNote() {
               id="description"
               name="description"
               placeholder="Pen Down Description"
+              value={note.description}
               onChange={onChange}
+              minLength={5}
+              required
             />
           </div>
           <div className="form-group my-2">
@@ -48,10 +56,14 @@ export default function AddNote() {
               id="tags"
               name="tags"
               placeholder="Note Tags"
+              value={note.tag}
               onChange={onChange}
+              minLength={5}
+              required
             />
           </div>
           <button
+            disabled={note.title.length < 5 || note.description.length < 5}
             type="submit"
             className="btn btn-primary"
             onClick={createNote}

@@ -1,0 +1,13 @@
+.title{
+    text-align: center;
+    font-family: 'Mate SC', serif;
+}
+
+.contain{
+    display: flex;
+    flex-direction: column;
+}
+
+.item-label{
+    font-family: 'Taviraj', serif;
+}

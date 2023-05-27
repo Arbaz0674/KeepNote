@@ -35,8 +35,7 @@ export default function Notes() {
     e.preventDefault();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
-
-    console.log(refClose.current);
+    // console.log(refClose.current);
     // editNote(note);
   };
   const onChange = (e) => {
@@ -91,6 +90,8 @@ export default function Notes() {
                     value={note.etitle}
                     aria-describedby="emailHelp"
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="form-group my-2">
@@ -102,6 +103,8 @@ export default function Notes() {
                     name="edescription"
                     value={note.edescription}
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="form-group my-2">
@@ -128,6 +131,9 @@ export default function Notes() {
                 Close
               </button>
               <button
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
                 onClick={saveUpdateNote}
                 type="button"
                 className="btn btn-primary"
@@ -139,7 +145,10 @@ export default function Notes() {
         </div>
       </div>
       <div className="row my-3">
-        <h2>Your Note</h2>
+        <h2 className="title">Your Note</h2>
+        <div className="container mx-2">
+          {notes.length === 0 && "No notes to display"}
+        </div>
         {notes.map((note) => {
           return (
             <NoteItem note={note} updateNote={updateNote} key={note.title} />
