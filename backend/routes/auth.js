@@ -17,7 +17,7 @@ router.post(
     body("password").isLength({ min: 5 }),
   ],
   async (req, res) => {
-    let success = false;
+    let type = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -40,11 +40,11 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, SECRET_KEY);
-      success = true;
-      res.status(200).json({ success, authToken });
+      type = true;
+      res.status(200).json({ type, authToken });
     } catch (err) {
       console.log(err);
-      res.status(400).json({ success, err: err });
+      res.status(400).json({ type, err: err });
     }
   }
 );
@@ -61,7 +61,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let success = false;
+    let type = false;
 
     const { email, password } = req.body;
     try {
@@ -69,14 +69,14 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ success, error: "Kindly Enter Correct Credentials" });
+          .json({ type, error: "Kindly Enter Correct Credentials" });
       }
 
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
         return res
           .status(400)
-          .json({ success, error: "Kindly Enter Correct Credentials" });
+          .json({ type, error: "Kindly Enter Correct Credentials" });
       }
       const data = {
         user: {
@@ -84,8 +84,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(data, SECRET_KEY);
-      success = "true";
-      res.status(200).json({ success, authToken });
+      type = "true";
+      res.status(200).json({ type, authToken });
     } catch (err) {
       res.status(500).send("Some Error Occurred");
     }

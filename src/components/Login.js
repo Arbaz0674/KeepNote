@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./../css/Style.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
   const [credential, setCredential] = useState({ email: "", password: "" });
   let navigate = useNavigate();
   const validateUser = async (e) => {
@@ -18,11 +18,12 @@ export default function Login() {
       }),
     });
     const user = await fetchUser.json();
-    if (user.success) {
+    if (user.type) {
       localStorage.setItem("auth-token", user.authToken);
       navigate("/");
+      props.alertfunc(user.type, "LoggedIn Successfully");
     } else {
-      alert(user.error);
+      props.alertfunc(user.type, user.error);
     }
     setCredential({ email: "", password: "" });
   };
