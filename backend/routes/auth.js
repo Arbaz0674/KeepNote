@@ -9,6 +9,7 @@ const SECRET_KEY = `Dermanbuster123`;
 
 const router = express.Router();
 
+//Creating new User for Application
 router.post(
   "/createuser",
   [
@@ -20,7 +21,7 @@ router.post(
     let type = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ type, error: errors.array() });
     }
     try {
       let user = await User.findOne({ email: req.body.email });
@@ -42,9 +43,9 @@ router.post(
       const authToken = jwt.sign(data, SECRET_KEY);
       type = true;
       res.status(200).json({ type, authToken });
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({ type, err: err });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ type, error: error.message });
     }
   }
 );
@@ -86,8 +87,8 @@ router.post(
       const authToken = jwt.sign(data, SECRET_KEY);
       type = "true";
       res.status(200).json({ type, authToken });
-    } catch (err) {
-      res.status(500).send("Some Error Occurred");
+    } catch (error) {
+      res.status(500).json({ type, error: "Some Error Occurred" });
     }
   }
 );
