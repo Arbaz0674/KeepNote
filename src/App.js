@@ -19,7 +19,7 @@ function App() {
   };
   return (
     <>
-      <NoteState>
+      <NoteState alertfunc={showAlert}>
         <Router>
           <Navbar />
           <Alert alert={alert} />

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Alert(props) {
   const requestStatus = (word) => {
-    let status = word === "true" ? "Success" : "Fail";
+    let status = word === "true" ? "Success" : "Error";
     console.log(props.alert.message);
     return status;
   };

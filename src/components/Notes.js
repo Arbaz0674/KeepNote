@@ -28,7 +28,6 @@ export default function Notes() {
       edescription: currentNote.description,
       etag: currentNote.tag,
     });
-    console.log(btnref);
   };
   const saveUpdateNote = (e) => {
     console.log(`Note before update`, note);

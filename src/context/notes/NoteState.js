@@ -30,6 +30,11 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const savedNote = await response.json();
+    if (savedNote.status) {
+      props.alertfunc(savedNote.status, "Notes Added Successfully");
+    } else {
+      props.alertfunc(savedNote.status, savedNote.message);
+    }
     setNote(notes.concat(savedNote));
   };
   //Delete a Note
@@ -43,9 +48,14 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
     setNote(notes.filter((note) => note._id !== id));
+    if (json.status) {
+      props.alertfunc("true", "Notes has been deleted successfully");
+    } else {
+      props.alertfunc(json.status, json.message);
+    }
   };
+
   //Edit a Note
   const editNote = async (id, title, description, tag) => {
     // API Call
@@ -58,7 +68,12 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const res = await response.json();
-    console.log(res);
+    //Response Receive From Editing Note
+    if (res.status) {
+      props.alertfunc("true", "Note has been updated successfully");
+    } else {
+      props.alertfunc(res.status, res.message);
+    }
 
     for (let i = 0; i < notes.length; i++) {
       if (notes[i]._id === id) {
