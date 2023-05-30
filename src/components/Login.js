@@ -33,7 +33,7 @@ export default function Login(props) {
   return (
     <div className="contain text-center">
       <form className="backgrd" onSubmit={validateUser}>
-        <h1 className="display-3 title my-3">Login</h1>
+        <h1 className="display-3 title my-3">Login to use KeepNote</h1>
         <div className="form-group mx-2">
           <label htmlFor="exampleInputEmail1 my-2" className="item-label">
             Email Address

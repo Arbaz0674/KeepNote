@@ -1,12 +1,16 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-export default function Navbar() {
+export default function Navbar(props) {
   let location = useLocation();
+  const logout = () => {
+    localStorage.removeItem("auth-token");
+    props.alertfunc("true", `Logged Out Successfully`);
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          iNoteBook
+          KeepNote
         </Link>
         <button
           className="navbar-toggler"
@@ -43,14 +47,22 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <Link className="btn btn-info mx-2" to="/login" role="button">
-              Login
-            </Link>
-            <Link className="btn btn-info mx-2" to="/signup" role="button">
-              SignUp
-            </Link>
-          </form>
+          {!localStorage.getItem("auth-token") ? (
+            <form className="d-flex">
+              <Link className="btn btn-info mx-1" to="/login" role="button">
+                Login
+              </Link>
+              <Link className="btn btn-info mx-1" to="/signup" role="button">
+                SignUp
+              </Link>
+            </form>
+          ) : (
+            <form className="d-flex">
+              <button className="btn btn-info mx-1" onClick={logout}>
+                Logout
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </nav>

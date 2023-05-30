@@ -42,7 +42,9 @@ export default function SignUp(props) {
   return (
     <div className="contain text-center">
       <form onSubmit={validateUser}>
-        <h1 className="display-3 title my-3">Sign Up</h1>
+        <h1 className="display-3 title my-3">
+          Create an account to use KeepNote
+        </h1>
         <div className="form-group mx-2">
           <label htmlFor="exampleInputEmail1 my-2" className="item-label">
             Name
